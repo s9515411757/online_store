@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load cache %}
+{% block title %}В разработке{% endblock %}
+{% block content %}
+<div class="card">
+  <div class="card-header">
+    Новости
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p>Мы предлагаем Вам зарегистрироваться на нашем сервере и получить учётную запись для использования электронного почтового ящика на Российском сервере (и для использования всеми услугами сайта gosuslugi.ru).</p>
+      <p>Получив учётную запись, Вы можете указать общегосударственный регистрационной номер (ОГРН) представляемого юридического лица (ЮЛ) либо же индивидуального предпринимателя (ИП) для предоставления сведений о наименовании и количестве товаров и услуг, предоставляемых или же необходимых для обеспечения функционирования Вашей организации, и наш сервер автоматически подберёт для Вас наилучшие предложения по стоимости</p>
+      <p>Мы планируем также привязать алгоритм оценки стоимости грузоперевозок, чтобы сделать закупки с продажами более комфортными</p>
+      <footer class="blockquote-footer">От Спартака Владимировича Хатунцева</footer>
+    </blockquote>
+  </div>
+</div>
+<hr>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Нумерация</th>
+      <th scope="col">Заголовок</th>
+      <th scope="col">Описание</th>
+      <th scope="col">Логин сотрудника</th>
+      <th scope="col">Дата</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for product in products %}
+    <tr>
+      <th scope="row">{{ product.pk }}</th>
+      <td>{{ product.title }}</td>
+      <td>{{ product.text }}</td>
+      <td>{{ product.author.username }}</td>
+      <td>{{ product.pub_date|date:"d E Y" }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

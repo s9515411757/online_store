@@ -1,0 +1,38 @@
+{% load static %}
+{% with request.resolver_match.view_name as view_name %}
+<nav class="navbar navbar-light bg-primary">
+    <div class="container">
+      <a class="navbar-brand" class="btn btn-dark" href="{% url 'home:index' %}">
+        <img src="" width="30" height="30" class="d-inline-block align-top" alt="">
+        Hermestorg
+      </a>
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link active"
+             href="{% url 'about:author' %}">Создатели</a>
+        </li>
+        {% if  request.user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link active" href="{% url 'home:product_create' %}">Продукт</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link link-light {% if view_name  == 'users:password_change' %}active{% endif %}" href="{% url 'users:password_change' %}">Изменить пароль</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link link-light" href="{% url 'users:logout' %}">Выйти</a>
+        </li>
+        <li>
+          Пользователь: {{ user.username }}
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link link-light {% if view_name  == 'users:login' %}active{% endif %}" href="{% url 'users:login' %}">Войти</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link link-light {% if view_name  == 'users:signup' %}active{% endif %}" href="{% url 'users:signup' %}">Регистрация</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+{% endwith %}
